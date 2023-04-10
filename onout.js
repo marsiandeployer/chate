@@ -89,7 +89,7 @@ app.post(
           });
         }
 
-
+        console.log(stdout);
 
         fs.readFile(filenam, 'utf8', function (err, data) {
           if (err) {
@@ -100,7 +100,7 @@ app.post(
 
           //if request.body.link is not empty
           if (req.body.link) {
-            link = "<a href='"+esc_attr(req.body.link)+"'>"+req.body.linkText+"</a>";
+            link = "<a href='" + esc_attr(req.body.link) + "'>" + req.body.linkText + "</a>";
           }
           h1text = esc_attr(req.body.h1text);
           let description = esc_attr(req.body.main_text);
@@ -132,27 +132,28 @@ app.post(
             }
             console.log('File updated successfully');
           });
+
+
+          //load ghkey from .env
+
+
+
+          exec(
+            `git add . && git commit -a -m "replace chat welcome screen" && git push https://${process.argv[2]}@github.com/marsiandeployer/${reponame}.git && git checkout main`,
+            (error, stdout, stderr) => {
+              if (error) {
+                console.error(`84: ${error}`);
+                return res.status(400).json({
+                  error: '156',
+                });
+              }
+              console.log(stdout);
+              res.send(
+                `Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed`,
+              );
+            },
+          );
         });
-
-        //load ghkey from .env
-
-
-
-        exec(
-          `git commit -a -m "replace chat welcome screen" && git push https://${process.argv[2]}@github.com/marsiandeployer/${reponame}.git && git checkout main`,
-          (error, stdout, stderr) => {
-            if (error) {
-              console.error(`84: ${error}`);
-              return res.status(400).json({
-                error: '156',
-              });
-            }
-            console.log(stdout);
-            res.send(
-              `Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed`,
-            );
-          },
-        );
       },
     );
   },
