@@ -172,7 +172,7 @@ app.post(
                     <div class="container col-5">
                     <Br>  <bR><br><br>
                     <div class="alert alert-success" role="alert">
-                Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed . 
+                Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in <span id=incomeTicker></span> sec. Enjoy :) Plesae note if you send form again domain will be changed . 
                 <br><Br><br>
                 Widget HTML code to embed on your site:
                 
@@ -188,6 +188,17 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
 </script></textarea>
                 </div>
                 </div>
+                <script>
+                
+                var incomeTicker = 60;
+
+window.setInterval(function(){
+ if (incomeTicker > 0)
+	 incomeTicker--;
+      document.getElementById("incomeTicker").innerHTML = "Next Profit In : " + incomeTicker + " seconds";
+if (incomeTicker <= 0)
+	incomeTicker = 60;
+}, 1000);</script>
                 </body>
                 </html>
                 `,
