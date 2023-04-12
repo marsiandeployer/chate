@@ -37,24 +37,29 @@ function esc_attr(str) {
 
 let filenam = 'components/Chat/Chat.tsx';
 //test regex is it possible to change such file? does it have something to change?
-const regex = new RegExp(`<div className="text-center text-4xl font-bold text-black dark:text-white">
+const regex = new RegExp(`          <div className="text-center text-4xl font-bold text-black dark:text-white">
+            (.*?)
+          </div>
+          <div className="text-center text-lg text-black dark:text-white">
+            <div className="mb-8">.*?</div>
+            <div className="mb-2 font-bold">
+              .*?
+            </div>
+          </div>
+          <div className="text-center text-gray-500 dark:text-gray-400">
+            <div className="mb-2">
+              .*?
+            </div>
+            <div className="mb-2">
+              .*?
+            </div>
+            <div className="mb-2">
               (.*?)
             </div>
-            <div className="text-center text-lg text-black dark:text-white">
-              <div className="mb-8">{\`Chatbot UI is an open source clone of OpenAI\'s ChatGPT UI.\`}</div>
-              <div className="mb-2 font-bold">
-                .*?
-              </div>
+            <div>
+              (.*?)
             </div>
-            <div className="text-center text-gray-500 dark:text-gray-400">
-              .*?
-              <div className="mb-2">
-                (.*?)
-              </div>
-              <div>
-                (.*?)
-              </div>
-            </div>`, 's')
+          </div>`, 's')
 
 
 
@@ -170,6 +175,7 @@ app.post(
                   
                   
                     <div class="container col-5">
+                    
                     <Br>  <bR><br><br>
                     <div class="alert alert-success" role="alert">
                 Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in <span id='incomeTicker'>60</span>s. Enjoy :) Plesae note if you send form again domain will be changed . 
@@ -226,15 +232,8 @@ app.get('/', (req, res) => {
       return res.status(400).json({
         error: 'Failed to find regex, please contact us (error onout.js missing regex)',
       });
-    }
-  });
-
-
-
-
-
-
-  res.send(`
+    } else {
+      res.send(`
   <!doctype html>
 <html lang="en">
   <head>
@@ -247,39 +246,43 @@ app.get('/', (req, res) => {
   <body>
   
 	
-		<div class="container col-7">
-    <div class=row>
-    <div class="col-6">
-    <form method="post"  action="/submit-form"><br><br>
-    1 Main title:<Br>
-    <input type='text' name='h1text' placeholder='Welcome!' value='Your welcome message'><Br>
+  <div class="container my-5">
+  <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+    <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+      
+      <form method="post"  action="/submit-form"><br><br>
+      1 Main title:<Br>
+      <input type='text' name='h1text' placeholder='Welcome!' value='Your welcome message'><Br>
+  
+        2 Main text <br>
+        <textarea style='width:500px;height:300px' required name='main_text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
+        <!-- <br>
+        OPEN_AI_KEY (leave empty if you plan to sell it externally):<Br>
+        <input type='text' name='open_ai_key' value=''><Br>
+        -->
+        <Br>3 Link where user can get access code:<Br>
+        <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value='https://www.buymeacoffee.com/onoutorg/e/127423'><Br>
+        <Br>
+        4 Text for link<Br>
+        <input type='text' name='linkText' placeholder='Get API key here' value='Buy access'><Br>
+        <Br>
+        <input type='submit' class='btn btn-primary' value='deploy test' style='size:30px'>
+      <input type='button' class='btn' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
+      <a href="https://t.me/onoutsupportbot" target=_blank>Support</a>
+      </form>
+    </div>
+    <div class="col-lg-4 p-0 overflow-hidden shadow-lg">
+        <img class="rounded-lg-3" src="https://onout.org/Chate/mainimage.png" alt="" width="720">
+    </div>
+  </div>
+</div>
 
-	    2 Main text <br>
-      <textarea style='width:500px;height:300px' required name='main_text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
-      <!-- <br>
-      OPEN_AI_KEY (leave empty if you plan to sell it externally):<Br>
-      <input type='text' name='open_ai_key' value=''><Br>
-      -->
-      <Br>3 Link where user can get access code:<Br>
-      <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value='https://www.buymeacoffee.com/onoutorg/e/127423'><Br>
-      <Br>
-      4 Text for link<Br>
-      <input type='text' name='linkText' placeholder='Get API key here' value='Buy access'><Br>
-      <Br>
-      <input type='submit' class='btn btn-primary' value='deploy test' style='size:30px'>
-	  <input type='button' class='btn' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
-    </form>
-    
-    </div>
-    <div class="col-6"><bR><br><br>
-    <img src='https://onout.org/Chate/mainimage.png' width=100%>
-    </div><Br><Br>
-    <a href="https://t.me/onoutsupportbot" target=_blank>Support</a>
-    </div>
-    </div>
   </body>
 </html>
   `);
+    }
+  });
+
 });
 
 
