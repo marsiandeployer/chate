@@ -203,7 +203,8 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
 </script></textarea>
                 <h2>zip archive with site:</h2>
                 <form id="iframe-generator-form">
-        <input type="hidden" value="https://chate-git-${nm}-marsiandeployer.vercel.app/" id="site-url" name="site-url" required>
+        <input type="hidden" value="https://chate-git-${nm}-marsiandeployer.vercel.app/" id="site-url" name="site-url" >
+        <input type="hidden" value="${h1text}" id="site-title" name="site-url" >
         <button type="submit">Download zip archive</button>
     </form>
 
@@ -211,13 +212,13 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
         document.getElementById('iframe-generator-form').addEventListener('submit', async (event) => {
             event.preventDefault();
             const siteUrl = document.getElementById('site-url').value;
-
+            const siteTitle = document.getElementById('site-title').value; 
             const response = await fetch('https://zips.onout.org/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ siteUrl })
+                body: JSON.stringify({ siteUrl, siteTitle })
             });
 
             if (response.ok) {
