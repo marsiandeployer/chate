@@ -179,14 +179,14 @@ app.post(
                     <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
                   
                   
-                    <div class="container col-5">
+                    <div class="">
                     
                     <Br>  <bR><br>
                     <h1><a href="https://chate-git-${nm}-marsiandeployer.vercel.app/" target=_blank>https://chate-git-${nm}-marsiandeployer.vercel.app/</a></h1>
                     <br>
                     <div class="alert alert-success" role="alert">
                 Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in <span id='incomeTicker'>60</span>s. Enjoy :) Plesae note if you send form again domain will be changed . 
-                <br><script>var incomeTicker = 60;
+                </div><script>var incomeTicker = 60;
 
                 window.setInterval(function(){
                  if (incomeTicker > 0)
@@ -195,12 +195,12 @@ app.post(
                 if (incomeTicker <= 0)
                   incomeTicker = 60;
                 }, 1000);
-                </script><Br><br>
+                </script><Br>
                 <h2>Widget HTML code to embed on your site:</h2>
                 
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
 <!-- iframe with 100% height -->
-<iframe style='border:0;min-width:400px;min-height:800px' src="https://chate-git-${nm}-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
+<iframe style='border:0;min-width:400px;min-height:1000px' src="https://chate-git-${nm}-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
 <!-- fix 100% onoutiframe iframe height on pure js -->
 <script>
 var iframe = document.getElementById('onoutiframe');
@@ -241,7 +241,7 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
             }
         });
     </script>
-                </div>
+                
                 </div>
                 
                 </div>
