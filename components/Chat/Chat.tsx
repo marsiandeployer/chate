@@ -59,7 +59,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   } = useContext(HomeContext);
 
   const [currentMessage, setCurrentMessage] = useState<Message>();
-  const [autoScrollEnabled, setAutoScrollEnabled] = useState<boolean>(true);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showScrollDownButton, setShowScrollDownButton] =
     useState<boolean>(false);
@@ -255,33 +255,16 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   );
 
   const scrollToBottom = useCallback(() => {
-    if (autoScrollEnabled) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      textareaRef.current?.focus();
-    }
+    
+    
   }, [autoScrollEnabled]);
 
   const handleScroll = () => {
-    if (chatContainerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } =
-        chatContainerRef.current;
-      const bottomTolerance = 30;
-
-      if (scrollTop + clientHeight < scrollHeight - bottomTolerance) {
-        setAutoScrollEnabled(false);
-        setShowScrollDownButton(true);
-      } else {
-        setAutoScrollEnabled(true);
-        setShowScrollDownButton(false);
-      }
-    }
+    
   };
 
   const handleScrollDown = () => {
-    chatContainerRef.current?.scrollTo({
-      top: chatContainerRef.current.scrollHeight,
-      behavior: 'smooth',
-    });
+    
   };
 
   const handleSettings = () => {
@@ -301,9 +284,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   };
 
   const scrollDown = () => {
-    if (autoScrollEnabled) {
-      messagesEndRef.current?.scrollIntoView(true);
-    }
+    
   };
   const throttledScrollDown = throttle(scrollDown, 250);
 
@@ -396,7 +377,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ref={chatContainerRef}
             onScroll={handleScroll}
           >
-            {selectedConversation?.messages.length === 0 ? (
+            {false ? (
               <>
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
                   <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
@@ -405,36 +386,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Chatbot UI'
+                      'Курица Агроном'
                     )}
                   </div>
-
-                  {models.length > 0 && (
-                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                      <ModelSelect />
-
-                      <SystemPrompt
-                        conversation={selectedConversation}
-                        prompts={prompts}
-                        onChangePrompt={(prompt) =>
-                          handleUpdateConversation(selectedConversation, {
-                            key: 'prompt',
-                            value: prompt,
-                          })
-                        }
-                      />
-
-                      <TemperatureSlider
-                        label={t('Temperature')}
-                        onChangeTemperature={(temperature) =>
-                          handleUpdateConversation(selectedConversation, {
-                            key: 'temperature',
-                            value: temperature,
-                          })
-                        }
-                      />
-                    </div>
-                  )}
+                      
                 </div>
               </>
             ) : (
@@ -455,6 +410,23 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     <IconClearAll size={18} />
                   </button>
                 </div>
+                
+                <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
+                  <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
+                    {models.length === 0 ? (
+                      <div>
+                        <Spinner size="16px" className="mx-auto" />
+                      </div>
+                    ) : (
+                      'Сhicken agronomist'
+                    )}
+                    <br />
+                    Ask your question using the form below
+                  </div>
+                  
+                  
+                </div>
+                
                 {showSettings && (
                   <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
                     <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
