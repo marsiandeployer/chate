@@ -103,3 +103,11 @@ If you don't have an OpenAI API key, you can get one [here](https://platform.ope
 If you have any questions, feel free to reach out to Mckay on [Twitter](https://twitter.com/mckaywrigley).
 
 [GCSE]: https://developers.google.com/custom-search/v1/overview
+
+
+# devops
+для курицы 
+1. форкай репо на новый ак
+2. заходи в vervel под ним и делай деплой
+3. в settings -> envirement variable должны быть NEXT_PUBLIC_DEFAULT_SYSTEM_PROMPT и OPENAI_API_KEY
+4. поменять заголовки (велком месадж и Breadcrumbschate/components/Chat/Chat.tsx)
