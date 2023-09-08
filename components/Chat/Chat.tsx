@@ -418,10 +418,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Курица Агроном'
+                      'Сhicken agronomist'
                     )}
                     <br />
-                    (Задайте любой вопрос ниже)
+                    Ask your question using the form below
                   </div>
                   
                   
